@@ -1,4 +1,4 @@
-import { ref, onValue, off, get } from 'firebase/database';
+import { ref, onValue, get } from 'firebase/database';
 import { database } from '../config/firebase';
 import type { BusinessLicense, User } from '../types';
 
