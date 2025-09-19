@@ -28,12 +28,11 @@ export const DigitalRecords: React.FC = () => {
     ? currentUser?.businessId 
     : currentBusiness;
   
-  const { clients, digitalRecords, loading, business, deleteDigitalRecord } = useBusinessData(businessId || undefined);
+  const { clients, digitalRecords, loading, deleteDigitalRecord } = useBusinessData(businessId || undefined);
   const [selectedClient, setSelectedClient] = useState<string>('');
   const [searchTerm, setSearchTerm] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRecord, setSelectedRecord] = useState<DigitalRecord | null>(null);
-  const [isViewing, setIsViewing] = useState(false);
 
   const filteredRecords = digitalRecords.filter(record => {
     const client = clients.find(c => c.id === record.clientId);
@@ -47,19 +46,16 @@ export const DigitalRecords: React.FC = () => {
 
   const handleNewRecord = () => {
     setSelectedRecord(null);
-    setIsViewing(false);
     setIsModalOpen(true);
   };
 
   const handleViewRecord = (record: DigitalRecord) => {
     setSelectedRecord(record);
-    setIsViewing(true);
     setIsModalOpen(true);
   };
 
   const handleEditRecord = (record: DigitalRecord) => {
     setSelectedRecord(record);
-    setIsViewing(false);
     setIsModalOpen(true);
   };
 
@@ -115,8 +111,8 @@ export const DigitalRecords: React.FC = () => {
     }
   };
 
-  const renderRecordSummary = (record: DigitalRecord) => {
-    const data = record.data;
+  const renderRecordDetails = (record: DigitalRecord) => {
+    const data = record.data || {};
     
     switch (record.category) {
       case 'dermatology':
@@ -252,7 +248,7 @@ export const DigitalRecords: React.FC = () => {
                           {client?.name || 'Cliente desconocido'}
                         </h3>
                         <span className="ml-3 px-2 py-1 bg-pink-100 text-pink-800 text-xs rounded-full">
-                          {getRecordTypeLabel(record.category)}
+                          {getRecordTypeLabel(record.category || 'beauty')}
                         </span>
                       </div>
 
@@ -263,7 +259,7 @@ export const DigitalRecords: React.FC = () => {
                         Creado por: {record.createdBy}
                       </div>
 
-                      {renderRecordSummary(record)}
+                      {renderRecordDetails(record)}
                     </div>
 
                     <div className="flex items-center space-x-2">
@@ -332,10 +328,13 @@ export const DigitalRecords: React.FC = () => {
           setSelectedRecord(null);
         }}
         record={selectedRecord}
-        isViewing={isViewing}
-        businessType={business?.category as BusinessCategory || 'other'}
-        clients={clients}
+        onSave={() => {
+          setIsModalOpen(false);
+          setSelectedRecord(null);
+        }}
       />
     </div>
   );
 };
+
+export default DigitalRecords;

@@ -24,14 +24,12 @@ interface ClientRecordsListProps {
 
 const ClientRecordsList: React.FC<ClientRecordsListProps> = ({
   client,
-  businessId,
-  businessCategory
+  businessId
 }) => {
   const { getClientRecords, deleteClientRecord } = useAuth();
   const [records, setRecords] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedRecord, setSelectedRecord] = useState<any>(null);
-  const [isModalVisible, setIsModalVisible] = useState(false);
   const [isViewModalVisible, setIsViewModalVisible] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterType, setFilterType] = useState('');
@@ -138,7 +136,7 @@ const ClientRecordsList: React.FC<ClientRecordsListProps> = ({
         <button
           onClick={() => {
             setSelectedRecord(null);
-            setIsModalVisible(true);
+            setIsViewModalVisible(true);
           }}
           className="flex items-center px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors"
         >
@@ -186,7 +184,7 @@ const ClientRecordsList: React.FC<ClientRecordsListProps> = ({
           </p>
           {!searchTerm && !filterType && (
             <button
-              onClick={() => setIsModalVisible(true)}
+              onClick={() => setIsViewModalVisible(true)}
               className="text-pink-600 hover:text-pink-700 font-medium"
             >
               Crear el primer registro
@@ -246,7 +244,7 @@ const ClientRecordsList: React.FC<ClientRecordsListProps> = ({
                     <button
                       onClick={() => {
                         setSelectedRecord(record);
-                        setIsModalVisible(true);
+                        setIsViewModalVisible(true);
                       }}
                       className="p-2 text-gray-400 hover:text-gray-600"
                       title="Editar registro"

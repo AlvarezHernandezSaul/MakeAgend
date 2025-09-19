@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import { Plus, Building2, Key, Trash2, CheckCircle, XCircle } from 'lucide-react';
+import { Plus, Building2, Key, CheckCircle, XCircle } from 'lucide-react';
 
 export const BusinessManager: React.FC = () => {
   const { currentUser, businessAccess, addBusinessAccess, currentBusiness, setCurrentBusiness } = useAuth();

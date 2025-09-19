@@ -196,8 +196,13 @@ const ClientRecordModal: React.FC<ClientRecordModalProps> = ({
       const recordData: Omit<DigitalRecord, 'id'> = {
         clientId: client.id,
         businessId,
+        serviceId: '', // Campo requerido
+        treatment: recordDataValues.treatment || '', // Campo requerido
         category: activeTab,
         date: recordDate,
+        notes: recordDataValues.notes || '', // Campo requerido
+        diagnosis: recordDataValues.diagnosis,
+        duration: recordDataValues.duration ? parseInt(recordDataValues.duration) : undefined,
         data: recordDataValues,
         createdBy: currentUser.uid,
         createdAt: selectedRecord?.createdAt || new Date().toISOString(),
