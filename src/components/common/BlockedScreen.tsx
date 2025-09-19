@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { XCircle, Mail, RefreshCw } from 'lucide-react';
 import { notificationService } from '../../utils/notificationService';
 import type { User } from '../../types';
+import MakeAgendLogo from '../../assets/images/MakeAgend.png';
 
 interface BlockedScreenProps {
   user: User;
@@ -115,6 +116,15 @@ export const BlockedScreen: React.FC<BlockedScreenProps> = ({
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-red-50 to-pink-50">
       <div className="max-w-md w-full mx-4">
         <div className="bg-white rounded-lg shadow-xl p-8 text-center">
+          {/* Logo */}
+          <div className="flex justify-center mb-4">
+            <img 
+              src={MakeAgendLogo} 
+              alt="MakeAgend" 
+              className="h-10 w-auto opacity-60"
+            />
+          </div>
+
           {/* Icon */}
           <div className="bg-red-100 rounded-full p-4 w-20 h-20 mx-auto mb-6 flex items-center justify-center">
             <XCircle className="h-10 w-10 text-red-600" />

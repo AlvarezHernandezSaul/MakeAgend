@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { Eye, EyeOff, LogIn } from 'lucide-react';
+import MakeAgendLogo from '../../assets/images/MakeAgend.png';
 
 interface LoginProps {
   onToggleMode: () => void;
@@ -33,7 +34,13 @@ export const Login: React.FC<LoginProps> = ({ onToggleMode }) => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-50 to-purple-50">
       <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-xl shadow-lg">
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-2">MakeAgend</h2>
+          <div className="flex justify-center mb-4">
+            <img 
+              src={MakeAgendLogo} 
+              alt="MakeAgend" 
+              className="h-12 w-auto"
+            />
+          </div>
           <p className="text-gray-600">Gestión de Agenda para Negocios de Belleza</p>
         </div>
 

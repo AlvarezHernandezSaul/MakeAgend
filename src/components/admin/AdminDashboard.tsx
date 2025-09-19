@@ -3,6 +3,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { licenseService } from '../../utils/licenseService';
 import { notificationService } from '../../utils/notificationService';
 import type { Business, BusinessLicense } from '../../types';
+import MakeAgendLogo from '../../assets/images/MakeAgend.png';
 import { 
   Building2, 
   AlertTriangle, 
@@ -209,6 +210,11 @@ export const AdminDashboard: React.FC = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center">
+          <img 
+            src={MakeAgendLogo} 
+            alt="MakeAgend" 
+            className="h-8 w-auto mr-3"
+          />
           <Shield className="h-6 w-6 text-pink-600 mr-2" />
           <h1 className="text-2xl font-bold text-gray-900">Panel de Administración</h1>
         </div>

@@ -6,6 +6,7 @@ import type { Business, BusinessCategory, OperatingHours, User } from '../../typ
 import { getCategoryInfo, getAllCategories } from '../../config/businessCategories';
 import { generateUniqueBusinessKey } from '../../utils/businessKey';
 import { Building2 as Building, Clock, ArrowRight, X, Check, Save } from 'lucide-react';
+import MakeAgendLogo from '../../assets/images/MakeAgend.png';
 
 export const BusinessSetup: React.FC = () => {
   const { currentUser } = useAuth();
@@ -125,6 +126,13 @@ export const BusinessSetup: React.FC = () => {
       <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 flex items-center justify-center p-4">
         <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-2xl">
           <div className="text-center mb-8">
+            <div className="flex justify-center mb-4">
+              <img 
+                src={MakeAgendLogo} 
+                alt="MakeAgend" 
+                className="h-10 w-auto"
+              />
+            </div>
             <Building className="h-16 w-16 text-pink-600 mx-auto mb-4" />
             <h1 className="text-3xl font-bold text-gray-900 mb-2">Configura tu Negocio</h1>
             <p className="text-gray-600">Paso 1 de 3: Información básica</p>
@@ -165,6 +173,13 @@ export const BusinessSetup: React.FC = () => {
       <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 flex items-center justify-center p-4">
         <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-4xl">
           <div className="text-center mb-8">
+            <div className="flex justify-center mb-4">
+              <img 
+                src={MakeAgendLogo} 
+                alt="MakeAgend" 
+                className="h-10 w-auto"
+              />
+            </div>
             <Building className="h-16 w-16 text-pink-600 mx-auto mb-4" />
             <h1 className="text-3xl font-bold text-gray-900 mb-2">Selecciona los Giros de tu Negocio</h1>
             <p className="text-gray-600">Paso 2 de 3: Puedes seleccionar múltiples categorías</p>
@@ -247,6 +262,13 @@ export const BusinessSetup: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-2xl">
         <div className="text-center mb-8">
+          <div className="flex justify-center mb-4">
+            <img 
+              src={MakeAgendLogo} 
+              alt="MakeAgend" 
+              className="h-10 w-auto"
+            />
+          </div>
           <Clock className="h-16 w-16 text-pink-600 mx-auto mb-4" />
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Horarios de Atención</h1>
           <p className="text-gray-600">Paso 3 de 3: Configura tus horarios</p>

@@ -5,6 +5,7 @@ import { useLicenseGuard } from '../../hooks/useLicenseGuard';
 import { BusinessManager } from '../business/BusinessManager';
 import { ref, get } from 'firebase/database';
 import { database } from '../../config/firebase';
+import MakeAgendLogo from '../../assets/images/MakeAgend.png';
 import { 
   Calendar, 
   Users, 
@@ -188,13 +189,20 @@ export const Dashboard: React.FC = () => {
       {/* Welcome Header */}
       <div className="bg-gradient-to-r from-pink-500 to-purple-600 rounded-xl p-6 text-white">
         <div className="flex justify-between items-start">
-          <div>
-            <h1 className="text-2xl font-bold mb-2">
-              ¡Bienvenido de vuelta, {currentUser?.displayName || 'Usuario'}!
-            </h1>
-            <p className="text-pink-100">
-              {business?.name || 'Tu negocio'} - {format(new Date(), 'EEEE, d MMMM yyyy', { locale: es })}
-            </p>
+          <div className="flex items-center">
+            <img 
+              src={MakeAgendLogo} 
+              alt="MakeAgend" 
+              className="h-8 w-auto mr-4 opacity-90"
+            />
+            <div>
+              <h1 className="text-2xl font-bold mb-2">
+                ¡Bienvenido de vuelta, {currentUser?.displayName || 'Usuario'}!
+              </h1>
+              <p className="text-pink-100">
+                {business?.name || 'Tu negocio'} - {format(new Date(), 'EEEE, d MMMM yyyy', { locale: es })}
+              </p>
+            </div>
           </div>
           
           {/* Business Key para owners */}

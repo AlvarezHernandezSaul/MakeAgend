@@ -2,6 +2,8 @@ import React from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { BusinessSelector } from './BusinessSelector';
 import { useLicenseGuard } from '../../hooks/useLicenseGuard';
+import MakeAgendLogo from '../../assets/images/MakeAgend.png';
+import MLogo from '../../assets/images/M.png';
 import { 
   Calendar, 
   Users, 
@@ -83,17 +85,27 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {/* Header */}
         <div className={`${isCollapsed ? 'p-4' : 'p-6'} border-b border-gray-200 flex items-center justify-between`}>
           {!isCollapsed && (
-            <div>
-              <h1 className="text-xl font-bold text-pink-600">MakeAgend</h1>
-              <p className="text-sm text-gray-600 mt-1">
-                {currentUser?.role === 'owner' ? 'Propietario' : 'Asistente'}
-              </p>
+            <div className="flex items-center">
+              <img 
+                src={MakeAgendLogo} 
+                alt="MakeAgend" 
+                className="h-8 w-auto"
+              />
+              <div className="ml-3">
+                <p className="text-sm text-gray-600">
+                  {currentUser?.role === 'owner' ? 'Propietario' : 'Asistente'}
+                </p>
+              </div>
             </div>
           )}
           
           {isCollapsed && (
-            <div className="w-8 h-8 bg-pink-500 rounded-lg flex items-center justify-center">
-              <span className="text-white text-sm font-bold">M</span>
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center">
+              <img 
+                src={MLogo} 
+                alt="M" 
+                className="w-8 h-8 rounded-lg"
+              />
             </div>
           )}
 
