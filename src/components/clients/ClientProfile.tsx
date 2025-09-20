@@ -186,31 +186,31 @@ export const ClientProfile: React.FC<ClientProfileProps> = ({ clientId, onClose 
 
   return (
     <>
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-        <div className="bg-white rounded-lg shadow-xl w-full max-w-6xl max-h-[90vh] overflow-hidden">
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
+        <div className="bg-white rounded-lg shadow-xl w-full max-w-6xl h-full max-h-[95vh] sm:max-h-[90vh] flex flex-col overflow-hidden">
           {/* Header */}
-          <div className="bg-gradient-to-r from-pink-600 to-pink-700 text-white p-6">
+          <div className="bg-gradient-to-r from-pink-600 to-pink-700 text-white p-4 sm:p-6 flex-shrink-0">
             <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <User className="h-8 w-8 mr-3" />
-                <div>
-                  <h2 className="text-2xl font-bold">{client.name}</h2>
-                  <p className="text-pink-100">Perfil del Cliente</p>
+              <div className="flex items-center min-w-0">
+                <User className="h-6 w-6 sm:h-8 sm:w-8 mr-2 sm:mr-3 flex-shrink-0" />
+                <div className="min-w-0">
+                  <h2 className="text-lg sm:text-2xl font-bold truncate">{client.name}</h2>
+                  <p className="text-pink-100 text-sm sm:text-base">Perfil del Cliente</p>
                 </div>
               </div>
               <button
                 onClick={onClose}
-                className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                className="p-2 hover:bg-white/10 rounded-lg transition-colors flex-shrink-0"
               >
-                <X className="h-6 w-6" />
+                <X className="h-5 w-5 sm:h-6 sm:w-6" />
               </button>
             </div>
           </div>
 
-          <div className="flex flex-col lg:flex-row h-full max-h-[calc(90vh-120px)]">
+          <div className="flex flex-col lg:flex-row flex-1 min-h-0">
             {/* Información del Cliente */}
-            <div className="lg:w-1/3 bg-gray-50 p-6 border-r">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Información Personal</h3>
+            <div className="lg:w-1/3 bg-gray-50 p-4 sm:p-6 border-r lg:border-b-0 border-b flex-shrink-0 lg:flex-shrink lg:overflow-y-auto">
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4">Información Personal</h3>
               
               <div className="space-y-4">
                 <div className="flex items-center">
@@ -260,11 +260,11 @@ export const ClientProfile: React.FC<ClientProfileProps> = ({ clientId, onClose 
             </div>
 
             {/* Registros del Cliente */}
-            <div className="lg:w-2/3 flex flex-col">
+            <div className="lg:w-2/3 flex flex-col flex-1 min-h-0">
               {/* Controles */}
-              <div className="p-6 border-b bg-white">
+              <div className="p-4 sm:p-6 border-b bg-white flex-shrink-0">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                  <h3 className="text-lg font-semibold text-gray-900">
+                  <h3 className="text-base sm:text-lg font-semibold text-gray-900">
                     Expedientes Digitales ({filteredRecords.length})
                   </h3>
                   
@@ -309,7 +309,7 @@ export const ClientProfile: React.FC<ClientProfileProps> = ({ clientId, onClose 
               </div>
 
               {/* Lista de Registros */}
-              <div className="flex-1 overflow-y-auto p-6">
+              <div className="flex-1 overflow-y-auto p-4 sm:p-6" style={{ WebkitOverflowScrolling: 'touch' }}>
                 {paginatedRecords.length === 0 ? (
                   <div className="text-center py-12">
                     <FileText className="h-12 w-12 text-gray-400 mx-auto mb-4" />
@@ -333,58 +333,60 @@ export const ClientProfile: React.FC<ClientProfileProps> = ({ clientId, onClose 
                     )}
                   </div>
                 ) : (
-                  <div className="space-y-4">
+                  <div className="space-y-3 sm:space-y-4">
                     {paginatedRecords.map((record) => (
-                      <div key={record.id} className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                      <div key={record.id} className="bg-white border border-gray-200 rounded-lg p-3 sm:p-4 hover:shadow-md transition-shadow">
                         <div className="flex justify-between items-start">
-                          <div className="flex-1">
-                            <div className="flex items-center mb-2">
-                              <Clock className="h-4 w-4 text-gray-400 mr-2" />
-                              <span className="text-sm text-gray-500">
-                                {format(parseISO(record.date), 'dd/MM/yyyy', { locale: es })}
-                              </span>
-                              <span className="mx-2 text-gray-300">•</span>
-                              <span className="text-sm font-medium text-pink-600">
+                          <div className="flex-1 min-w-0">
+                            <div className="flex flex-col sm:flex-row sm:items-center mb-2 gap-1 sm:gap-0">
+                              <div className="flex items-center">
+                                <Clock className="h-4 w-4 text-gray-400 mr-2 flex-shrink-0" />
+                                <span className="text-xs sm:text-sm text-gray-500">
+                                  {format(parseISO(record.date), 'dd/MM/yyyy', { locale: es })}
+                                </span>
+                              </div>
+                              <span className="hidden sm:inline mx-2 text-gray-300">•</span>
+                              <span className="text-xs sm:text-sm font-medium text-pink-600 truncate">
                                 {getServiceName(record.serviceId)}
                               </span>
                             </div>
                             
-                            <h4 className="font-semibold text-gray-900 mb-2">{record.treatment}</h4>
+                            <h4 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base truncate">{record.treatment}</h4>
                             
                             {record.diagnosis && (
-                              <p className="text-sm text-gray-600 mb-2">
+                              <p className="text-xs sm:text-sm text-gray-600 mb-2">
                                 <strong>Diagnóstico:</strong> {record.diagnosis}
                               </p>
                             )}
                             
-                            <p className="text-sm text-gray-600 line-clamp-2">{record.notes}</p>
+                            <p className="text-xs sm:text-sm text-gray-600 line-clamp-2">{record.notes}</p>
                             
                             {record.duration && (
                               <div className="mt-2 flex items-center text-xs text-gray-500">
-                                <Clock className="h-3 w-3 mr-1" />
-                                Duración: {record.duration} minutos
+                                <Clock className="h-3 w-3 mr-1 flex-shrink-0" />
+                                <span className="truncate">Duración: {record.duration} minutos</span>
                               </div>
                             )}
                           </div>
 
-                          <div className="flex items-center space-x-2 ml-4">
+                          <div className="flex items-center space-x-1 sm:space-x-2 ml-2 sm:ml-4 flex-shrink-0">
                             {canEditRecord && (
                               <button
                                 onClick={() => handleEditRecord(record)}
-                                className="p-2 text-gray-400 hover:text-pink-600 hover:bg-pink-50 rounded-lg transition-colors"
+                                className="p-1.5 sm:p-2 text-gray-400 hover:text-pink-600 hover:bg-pink-50 rounded-lg transition-colors"
                                 title="Editar registro"
                               >
-                                <Edit className="h-4 w-4" />
+                                <Edit className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                               </button>
                             )}
                             
                             {canDeleteRecord && (
                               <button
                                 onClick={() => setShowDeleteConfirm(record.id)}
-                                className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                                className="p-1.5 sm:p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                                 title="Eliminar registro"
                               >
-                                <Trash2 className="h-4 w-4" />
+                                <Trash2 className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                               </button>
                             )}
                           </div>
