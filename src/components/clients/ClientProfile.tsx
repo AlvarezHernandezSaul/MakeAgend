@@ -207,7 +207,9 @@ export const ClientProfile: React.FC<ClientProfileProps> = ({ clientId, onClose 
             </div>
           </div>
 
-          <div className="flex flex-col lg:flex-row flex-1 min-h-0">
+          {/* Contenido Scrolleable */}
+          <div className="flex-1 overflow-y-auto lg:overflow-hidden" style={{ WebkitOverflowScrolling: 'touch' }}>
+            <div className="flex flex-col lg:flex-row lg:h-full">
             {/* Información del Cliente */}
             <div className="lg:w-1/3 bg-gray-50 p-4 sm:p-6 border-r lg:border-b-0 border-b flex-shrink-0 lg:flex-shrink lg:overflow-y-auto">
               <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-4">Información Personal</h3>
@@ -259,57 +261,57 @@ export const ClientProfile: React.FC<ClientProfileProps> = ({ clientId, onClose 
               </div>
             </div>
 
-            {/* Registros del Cliente */}
-            <div className="lg:w-2/3 flex flex-col flex-1 min-h-0">
-              {/* Controles */}
-              <div className="p-4 sm:p-6 border-b bg-white flex-shrink-0">
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                  <h3 className="text-base sm:text-lg font-semibold text-gray-900">
-                    Expedientes Digitales ({filteredRecords.length})
-                  </h3>
-                  
-                  {canCreateRecord && (
-                    <button
-                      onClick={handleNewRecord}
-                      className="flex items-center px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors"
-                    >
-                      <Plus className="h-4 w-4 mr-2" />
-                      Agregar Registro
-                    </button>
-                  )}
-                </div>
-
-                {/* Filtros y Búsqueda */}
-                <div className="mt-4 flex flex-col sm:flex-row gap-4">
-                  <div className="relative flex-1">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-                    <input
-                      type="text"
-                      placeholder="Buscar en registros..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                    />
+              {/* Registros del Cliente */}
+              <div className="lg:w-2/3 lg:flex lg:flex-col lg:overflow-y-auto">
+                {/* Controles */}
+                <div className="p-4 sm:p-6 border-b lg:border-b bg-white lg:flex-shrink-0">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-900">
+                      Expedientes Digitales ({filteredRecords.length})
+                    </h3>
+                    
+                    {canCreateRecord && (
+                      <button
+                        onClick={handleNewRecord}
+                        className="flex items-center px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors"
+                      >
+                        <Plus className="h-4 w-4 mr-2" />
+                        Agregar Registro
+                      </button>
+                    )}
                   </div>
 
-                  <div className="relative">
-                    <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-                    <select
-                      value={filterType}
-                      onChange={(e) => setFilterType(e.target.value)}
-                      className="pl-10 pr-8 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent appearance-none bg-white"
-                    >
-                      <option value="all">Todos los tratamientos</option>
-                      {treatmentTypes.map(type => (
-                        <option key={type.id} value={type.id}>{type.name}</option>
-                      ))}
-                    </select>
+                  {/* Filtros y Búsqueda */}
+                  <div className="mt-4 flex flex-col sm:flex-row gap-4">
+                    <div className="relative flex-1">
+                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                      <input
+                        type="text"
+                        placeholder="Buscar en registros..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                      />
+                    </div>
+
+                    <div className="relative">
+                      <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                      <select
+                        value={filterType}
+                        onChange={(e) => setFilterType(e.target.value)}
+                        className="pl-10 pr-8 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent appearance-none bg-white"
+                      >
+                        <option value="all">Todos los tratamientos</option>
+                        {treatmentTypes.map(type => (
+                          <option key={type.id} value={type.id}>{type.name}</option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Lista de Registros */}
-              <div className="flex-1 overflow-y-auto p-4 sm:p-6" style={{ WebkitOverflowScrolling: 'touch' }}>
+                {/* Lista de Registros */}
+                <div className="p-4 sm:p-6 lg:flex-1 lg:overflow-y-auto" style={{ WebkitOverflowScrolling: 'touch' }}>
                 {paginatedRecords.length === 0 ? (
                   <div className="text-center py-12">
                     <FileText className="h-12 w-12 text-gray-400 mx-auto mb-4" />
@@ -396,36 +398,37 @@ export const ClientProfile: React.FC<ClientProfileProps> = ({ clientId, onClose 
                   </div>
                 )}
 
-                {/* Paginación */}
-                {totalPages > 1 && (
-                  <div className="mt-6 flex items-center justify-between">
-                    <p className="text-sm text-gray-700">
-                      Mostrando {((currentPage - 1) * recordsPerPage) + 1} a {Math.min(currentPage * recordsPerPage, filteredRecords.length)} de {filteredRecords.length} registros
-                    </p>
-                    
-                    <div className="flex items-center space-x-2">
-                      <button
-                        onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                        disabled={currentPage === 1}
-                        className="p-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                      >
-                        <ChevronLeft className="h-4 w-4" />
-                      </button>
+                  {/* Paginación */}
+                  {totalPages > 1 && (
+                    <div className="mt-6 flex items-center justify-between">
+                      <p className="text-sm text-gray-700">
+                        Mostrando {((currentPage - 1) * recordsPerPage) + 1} a {Math.min(currentPage * recordsPerPage, filteredRecords.length)} de {filteredRecords.length} registros
+                      </p>
                       
-                      <span className="px-3 py-1 text-sm font-medium">
-                        {currentPage} de {totalPages}
-                      </span>
-                      
-                      <button
-                        onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-                        disabled={currentPage === totalPages}
-                        className="p-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                      >
-                        <ChevronRight className="h-4 w-4" />
-                      </button>
+                      <div className="flex items-center space-x-2">
+                        <button
+                          onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                          disabled={currentPage === 1}
+                          className="p-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                          <ChevronLeft className="h-4 w-4" />
+                        </button>
+                        
+                        <span className="px-3 py-1 text-sm font-medium">
+                          {currentPage} de {totalPages}
+                        </span>
+                        
+                        <button
+                          onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                          disabled={currentPage === totalPages}
+                          className="p-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                          <ChevronRight className="h-4 w-4" />
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             </div>
           </div>
